@@ -34,7 +34,7 @@ def modificar_linea_append(nombre_fichero="Fichero_Append.txt"):
     with open(nombre_fichero,'r+') as f:
         lista_lineas = f.readlines()
         for index, linea in enumerate(lista_lineas):
-            if index % 2 == 0:
+            if index % 2 != 0:
                 lista_lineas[index] = "Linea modificada\n"                
         f.seek(0)
         f.writelines(lista_lineas)
