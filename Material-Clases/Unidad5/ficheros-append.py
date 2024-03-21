@@ -36,7 +36,8 @@ def modificar_linea_append(nombre_fichero="Fichero_Append.txt"):
         for index, linea in enumerate(lista_lineas):
             if index % 2 == 0:
                 lista_lineas[index] = "Linea modificada\n"                
-                f.writelines(lista_lineas[index])
+        f.seek(0)
+        f.writelines(lista_lineas)
 
 
 crear_fichero_with()
