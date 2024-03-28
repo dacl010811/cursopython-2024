@@ -6,6 +6,8 @@ class Persona():
 
     """ Esta clase representa un plantilla para generar objetos de tipo <Persona>
     """
+    datos_estaticos = [(1,2,3,4,5,6,7,8,9,10,11),(1,2,3,4,5,6,7,8,9,10,11),(1,2,3,4,5,6,7,8,9,10,11)
+                       (1,2,3,4,5,6,7,8,9,10,11),(1,2,3,4,5,6,7,8,9,10,11),(1,2,3,4,5,6,7,8,9,10,11)]
 
     def __init__(self, nombre, numero_telefono, email):
         """Constructor para crear objetos de tipo <Persona>
@@ -39,11 +41,11 @@ class Persona():
 
     def __str__(self):
         return "str: Persona: [{} {} {}]".format(self.nombre, self.numero_telefono, self.email)
-
-    def guardar(self, datos):
-        print(type(datos))
-        with open("bdd.json", "w") as fjson:
-            json.dump(datos, fjson)
+    
+    def __del__(self):
+        if datos_estaticos:
+            del datos_estaticos
+    
 
 
 class Direccion():
@@ -128,16 +130,17 @@ class FuncionarioPublico(Persona, Direccion):
 # Instanciar las clases o crear objetos
 datos = []
 
+persona = Persona("","","")
+persona.comer()
+persona.correr()
+
+
 estudiante_1 = Estudiante("Darwin Calle", "09955877544",
                           "dacl010812@gmail.com", "UNL", "Sexto Modulo", 200)
 estudiante_2 = Estudiante("NIco Calle", "09955877544",
                           "dacl010813@gmail.com", "UNL", "Quinto Modulo", 200)
 estudiante_3 = Estudiante("Martha Calle", "09955877544",
                           "dacl010816@gmail.com", "UNL", "NOveno Modulo", 200)
-
-"""print(estudiante_1.__dict__)
-print(vars(estudiante_2))
-print(estudiante_3.__dict__)"""
 
 funcionario_1 = FuncionarioPublico("David", "0998522244", "dacl@gmail.com", "Av Maestro",
                                    "Loja", "Loja", "00245", "Ecuador", "SRI", "10", "Seguridad", "Seguridad INFO")
