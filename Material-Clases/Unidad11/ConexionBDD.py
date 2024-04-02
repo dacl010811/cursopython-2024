@@ -57,6 +57,34 @@ class Conexion():
             print(f"Error al insertar registros: {sql_dml} : Error: {type(e).__name__}")
         else:
             print(f"Registros insertados correctamente!!")
+                        
+    def selecionar_registros(self,nombre_table):
+        try:
+            sql = f"select * from {nombre_table}"
+            
+            self.__cursor = self.__conexion.cursor()
+            self.__cursor.execute(sql)            
+            lista_registros = self.__cursor.fetchall()   # self.__cursor.fetchone()
+        except Exception as e:
+            print(f"Error al seleccionar registros.  Error: {type(e).__name__}")
+            return
+        else:
+            return lista_registros
+        
+        
+    def selecionar_registro(self,nombre_table):
+        try:
+            sql = f"select * from {nombre_table}"
+            
+            self.__cursor = self.__conexion.cursor()
+            self.__cursor.execute(sql)            
+            fila = self.__cursor.fetchone()   # 
+        except Exception as e:
+            print(f"Error al seleccionar registro.  Error: {type(e).__name__}")
+            return
+        else:
+            return fila
+            
         
         
 #Invocacion
@@ -66,8 +94,19 @@ conexion_bdd1 = Conexion("conexionBDD.db")
 sql_ddl1 = f"CREATE TABLE IF NOT EXISTS NICOLAS_2 (CODIGO VARCHAR(100),nombre VARCHAR(100))"
 conexion_bdd1.crear_tabla('',sql_ddl1)
 
-for dato in range(1,200):    
+for dato in range(1,5):    
     sql_dml_1 = f'INSERT INTO DARWIN (nombre,edad,email,celular) values ("Nicolas Calle-{dato}",38,"dacl{dato}@gmail.com","0999887244")'
-    conexion_bdd1.insertar_registros(sql_dml_1)
+    #conexion_bdd1.insertar_registros(sql_dml_1)
+    
+datos = conexion_bdd1.selecionar_registros("DARWIN")
+dato = conexion_bdd1.selecionar_registro("DARWIN")
+
+for row in  datos:
+    print (f"[{row}]")
+
+print(f"La tabla tiene : {len(datos)} ")
+
+print("*******************  fechOne ***********************")
+print(f"Dato : {dato}")
 
 conexion_bdd1.cerrar()
